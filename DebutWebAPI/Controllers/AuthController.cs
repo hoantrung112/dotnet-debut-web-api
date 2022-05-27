@@ -10,6 +10,8 @@ using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Configuration;
 using System.IdentityModel.Tokens.Jwt;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace DebutWebAPI.Controllers
 {
@@ -20,7 +22,7 @@ namespace DebutWebAPI.Controllers
         //private readonly Models.AppContext appContext;
         private readonly ICitizenRepository _citizenRepository;
         private readonly IConfiguration _configuration;
-        public Citizen citizen = new();
+        public Citizen citizen = new Citizen();
 
         public AuthController(IConfiguration config, ICitizenRepository citizenRepository)
         {
@@ -29,7 +31,7 @@ namespace DebutWebAPI.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<Citizen>> Register(CitizenDto citizenDto)
+        public async Task<ActionResult<CitizenDto>> Register(CitizenDto citizenDto)
         {
             try
             {
@@ -40,9 +42,9 @@ namespace DebutWebAPI.Controllers
                 citizen.Hash = hash;
                 citizen.Salt = salt;
 
-                var newCitizen = await _citizenRepository.AddCitizen(citizen);
-
-                return CreatedAtAction(nameof(Register), new { id = newCitizen.CitizenId }, newCitizen);
+                citizen = await _citizenRepository.AddCitizen(citizen);
+                CitizenDto newCitizenDto = new CitizenDto(citizen);
+                return CreatedAtAction(nameof(Register), new { id = newCitizenDto.CitizenId }, newCitizenDto);
                 //return Ok("Citizen registered!");
             }
             catch (Exception e)

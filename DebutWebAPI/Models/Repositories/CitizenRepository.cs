@@ -19,7 +19,7 @@ namespace DebutWebAPI.Models
         public async Task<Citizen> AddCitizen(Citizen citizen)
         {
             var citizenWithEmail = await GetCitizenByEmail(citizen.Email);
-            var citizenWithUsername = await GetCitizenByEmail(citizen.Username);
+            var citizenWithUsername = await GetCitizenByUsername(citizen.Username);
             if (citizenWithEmail != null || citizenWithUsername != null)
             {
                 throw new Exception("Email or username has already been used!");
@@ -117,6 +117,15 @@ namespace DebutWebAPI.Models
             }
 
             return await query.ToListAsync();
+        }
+        public List<CitizenDto> ConvertToCitizenDTO(List<Citizen> citizens)
+        {
+            List<CitizenDto> result = new List<CitizenDto>();
+            foreach (var c in citizens)
+            {
+                result.Add(new CitizenDto(c));
+            }
+            return result;
         }
     }
 }

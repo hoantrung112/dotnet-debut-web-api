@@ -1,18 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using DebutWebAPI.Models.Constants;
+using DebutWebAPI.Models.Dto;
 
 namespace DebutWebAPI.Models
 {
     public interface ISmartHomeRepository
     {
-        Task<IEnumerable<Citizen>> Search(string username, Gender? gender);
-        Task<IEnumerable<Citizen>> GetCitizens();
-        Task<Citizen> GetCitizen(long citizenId);
-        Task<Citizen> GetCitizenByUsername(string username);
-        Task<Citizen> GetCitizenByEmail(string email);
-        Task<Citizen> GetCitizenByPhoneNumber(string phoneNumber);
-        Task<Citizen> AddCitizen(Citizen citizen);
-        Task<Citizen> UpdateCitizen(Citizen citizen);
-        Task<Citizen> DeleteCitizen(long citizenId);
+        Task<IEnumerable<SmartHome>> Search(SmartHomeType smartHomeType, string address);
+        Task<IEnumerable<SmartHome>> GetSmartHomes();
+        Task<IEnumerable<SmartHome>> GetSmartHomesByDisctrict(string district);
+        Task<SmartHome> GetSmartHome(long smartHomeId);
+        Task<SmartHome> GetSmartHomeByType(SmartHomeType smartHomeType);
+        Task<SmartHome> AddSmartHome(SmartHome smartHome);
+        Task<SmartHome> UpdateSmartHome(SmartHome smartHome);
+        Task<SmartHome> DeleteSmartHome(long smartHomeId);
+        List<SmartHomeDto> ConvertToSmartHomeDTO(List<SmartHome> smartHomes);
     }
 }

@@ -14,5 +14,6 @@ namespace DebutWebAPI.Models
         Task<Citizen> AddCitizen(Citizen citizen);
         Task<Citizen> UpdateCitizen(Citizen citizen);
         Task<Citizen> DeleteCitizen(long citizenId);
+        List<CitizenDto> ConvertToCitizenDTO(List<Citizen> citizens);
     }
 }

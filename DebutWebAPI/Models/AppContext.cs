@@ -37,7 +37,7 @@ namespace DebutWebAPI.Models
                 rd => new { rd.RoomId, rd.DeviceId });
 
             // Seed Citizen Table
-            modelBuilder.Entity<Citizen>().HasData(new Citizen
+            modelBuilder.Entity<Citizen>().HasData(new Citizen()
             {
                 CitizenId = 1,
                 Username = "nhtrung",

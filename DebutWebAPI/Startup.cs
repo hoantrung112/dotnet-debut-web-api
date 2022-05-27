@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DebutWebAPI.Models;
+using DebutWebAPI.Models.Repositories;
 using Microsoft.EntityFrameworkCore;
 using AspNet.Security.OAuth.Validation;
 
@@ -40,6 +41,7 @@ namespace DebutWebAPI
                 b => b.MigrationsAssembly(typeof(Models.AppContext).Assembly.FullName)));
 
             services.AddScoped<ICitizenRepository, CitizenRepository>();
+            services.AddScoped<ISmartHomeRepository, SmartHomeRepository>();
 
             services.AddSwaggerGen(c =>
             {

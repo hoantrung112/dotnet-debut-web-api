@@ -2,10 +2,22 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Collections.Generic;
 using DebutWebAPI.Models.Constants;
+using DebutWebAPI.Models.Dto;
 namespace DebutWebAPI.Models
 {
     public class SmartHome
     {
+        public SmartHome(SmartHomeDto smartHomeDto)
+        {
+            SmartHomeId = smartHomeDto.SmartHomeId;
+            SmartHomeType = smartHomeDto.SmartHomeType;
+            Address = smartHomeDto.Address;
+            District = smartHomeDto.District;
+        }
+        public SmartHome()
+        {
+
+        }
         [Key]
         public long SmartHomeId { get; set; }
 

@@ -6,6 +6,21 @@ namespace DebutWebAPI.Models
 {
     public class CitizenDto
     {
+        public CitizenDto(Citizen citizen)
+        {
+            CitizenId = citizen.CitizenId;
+            Username = citizen.Username;
+            PhoneNumber = citizen.PhoneNumber;
+            IdCardNumber = citizen.IdCardNumber;
+            Address = citizen.Address;
+            DOB = citizen.DOB;
+            Email = citizen.Email;
+            FullName = citizen.FullName;
+        }
+        public CitizenDto()
+        {
+
+        }
         [Key]
         public long CitizenId { get; set; }
 
@@ -23,5 +38,11 @@ namespace DebutWebAPI.Models
         public string Email { get; set; }
 
         public string Password { get; set; }
+        public string PhoneNumber { get; set; }
+
+        public DateTime DOB { get; set; }
+
+        public string IdCardNumber { get; set; }
+        public string Address { get; set; }
     }
 }
